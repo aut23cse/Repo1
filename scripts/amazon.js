@@ -1,4 +1,3 @@
-
 //Accumulator-->
 let productsHtml='';
 // -->
@@ -30,9 +29,9 @@ products.forEach((product) => {
       <div class="product-quantity-container">
         <select>
           <option selected value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
+          <option value="2">2</option>      
+          <option value="3">3</option>   
+          <option value="4">4</option>    
           <option value="5">5</option>
           <option value="6">6</option>
           <option value="7">7</option>
@@ -64,7 +63,7 @@ document.querySelectorAll('.js-add-to-cart')
   button.addEventListener('click',()=>{
    const productId= button.dataset.productId
 
-let matchingquantity 
+let matchingquantity; 
 
  cart.forEach((item)=>{
    if(productId === item.productId)
@@ -72,18 +71,30 @@ let matchingquantity
     matchingquantity=item
    }
  })
-   
- if(matchingquantity){
+ 
+ if(matchingquantity)
+ {
    matchingquantity.quantity+=1
  }
- else{
+ else
+ {
   cart.push({
     productId,
     quantity:1
   })
  }
+  let cartquantity=0;
 
-  
-   console.log(cart)
+  cart.forEach( (item)=>{
+
+        cartquantity+=item.quantity
+      
+    })
+
+document.querySelector('.js-cart-quantity')
+.textContent=cartquantity
+
   })
 })
+
+
