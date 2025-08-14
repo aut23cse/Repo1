@@ -1,10 +1,14 @@
+import { cart } from '../data/cart.js'
+
+
+
 //Accumulator-->
-let productsHtml='';
+let productsHtml = '';
 // -->
 products.forEach((product) => {
-  
-   productsHtml+=
-      ` <div class="product-container">
+
+  productsHtml +=
+    ` <div class="product-container">
       <div class="product-image-container">
         <img class="product-image"
           src="${product.image}">
@@ -16,14 +20,14 @@ products.forEach((product) => {
 
       <div class="product-rating-container">
         <img class="product-rating-stars"
-          src="images/ratings/rating-${product.rating.stars*10}.png">
+          src="images/ratings/rating-${product.rating.stars * 10}.png">
         <div class="product-rating-count link-primary">
          ${product.rating.count}
         </div>
       </div>
 
       <div class="product-price">
-        $${(product.priceCents /100).toFixed(2)}
+        $${(product.priceCents / 100).toFixed(2)}
       </div>
 
       <div class="product-quantity-container">
@@ -55,46 +59,43 @@ products.forEach((product) => {
       </button>
     </div>`
 })
-let jsproduct=document.querySelector('.js-product-grid')
-jsproduct.innerHTML=productsHtml
+let jsproduct = document.querySelector('.js-product-grid')
+jsproduct.innerHTML = productsHtml
 
 document.querySelectorAll('.js-add-to-cart')
-.forEach((button)=>{
-  button.addEventListener('click',()=>{
-   const productId= button.dataset.productId
+  .forEach((button) => {
+    button.addEventListener('click', () => {
+      const productId = button.dataset.productId
 
-let matchingquantity; 
+      let matchingquantity;
 
- cart.forEach((item)=>{
-   if(productId === item.productId)
-   {
-    matchingquantity=item
-   }
- })
- 
- if(matchingquantity)
- {
-   matchingquantity.quantity+=1
- }
- else
- {
-  cart.push({
-    productId,
-    quantity:1
-  })
- }
-  let cartquantity=0;
+      cart.forEach((item) => {
+        if (productId === item.productId) {
+          matchingquantity = item
+        }
+      })
 
-  cart.forEach( (item)=>{
+      if (matchingquantity) {
+        matchingquantity.quantity += 1
+      }
+      else {
+        cart.push({
+          productId,
+          quantity: 1
+        })
+      }
+      let cartquantity = 0;
 
-        cartquantity+=item.quantity
-      
+      cart.forEach((item) => {
+
+        cartquantity += item.quantity
+
+      })
+
+      document.querySelector('.js-cart-quantity')
+        .textContent = cartquantity
+
     })
-
-document.querySelector('.js-cart-quantity')
-.textContent=cartquantity
-
   })
-})
 
 
