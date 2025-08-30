@@ -39,7 +39,7 @@ export function addtocart(productId) {
     saveTostorage()
 }
 
-function saveTostorage() {
+export function saveTostorage() {
     localStorage.setItem('cart', JSON.stringify(cart))
 }
 
