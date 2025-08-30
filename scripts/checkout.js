@@ -1,4 +1,4 @@
-import { cart, removeFromCart } from '../data/cart.js';
+import { cart, removeFromCart, updateDeliveryOption } from '../data/cart.js';
 import { products } from '../data/products.js';
 import { formatCurrency } from '../scripts/utils/money.js';
 import { hello } from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js';
@@ -105,16 +105,18 @@ function deliveryOptionsHtml(matchingproducts, cartItem) {
 
 
         html +=
-            `<div class="delivery-option">
-        <input type="radio"
-         ${isChecked ? 'checked' : ''}
-         class="delivery-option-input" name="delivery-option-${matchingproducts.id}">
-        <div>
-        <div class="delivery-option-date">
-         ${dateString}
-        </div>
-        <div class="delivery-option-price">
-         ${priceString} Shipping
+            `<div class="delivery-option js-delivery-option"
+              data-product-id="${matchingproducts.id}"  
+              data-delivery-option-id="${deliveryOption.id}" >
+                <input type="radio"
+                ${isChecked ? 'checked' : ''}
+                class="delivery-option-input" name="delivery-option-${matchingproducts.id}">
+                <div>
+                <div class="delivery-option-date">
+                ${dateString}
+                </div>
+                <div class="delivery-option-price">
+                ${priceString} Shipping
          </div>
          </div>
          </div>
@@ -146,4 +148,15 @@ deletebutton.forEach((link) => {
 
     });
 });
+
+document.querySelectorAll('.js-delivery-option')
+    .forEach((element) => {
+        element.addEventListener('click', () => {
+            //const productId = element.dataset.productId;
+            //const deliveryOptionId = element.dataset.deliveryOptionId;
+            const { productId, deliveryOptionId } = element.dataset;
+            updateDeliveryOption(productId, deliveryOptionId);
+
+        });
+    });
 
