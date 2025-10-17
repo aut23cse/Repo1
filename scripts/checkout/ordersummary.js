@@ -40,10 +40,10 @@ export function renderOrderSummary() {
 
             <div class="cart-item-details">
                 <div class="product-name">
-            ${matchingproducts.name}
+                  ${matchingproducts.name}
                 </div>
                 <div class="product-price">
-                $${formatCurrency(matchingproducts.priceCents)}
+                 ${matchingproducts.getPrice()}
                 </div>
                 <div class="product-quantity">
                 <span>
