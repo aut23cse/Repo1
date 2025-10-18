@@ -32,6 +32,30 @@ class Product {
   getPrice() {
     return `$${formatCurrency(this.priceCents)}`;
   }
+  //in this technique is called method overriding;
+  extraInfoHTML() {
+    return ` `;
+  }
+
+}
+class Clothing extends Product {
+  sizeChartLink;
+
+  constructor(productDetails) {
+    //super() it helps to call the poductdetails from its parent class
+    super(productDetails);
+    this.sizeChartLink = productDetails.sizeChartLink;
+
+
+
+  }
+  extraInfoHTML() {
+    //super.extraInfoHTML();
+    return `
+        <a href="${this.sizeChartLink}" >
+        Size chart
+        </a>`;
+  }
 
 }
 
@@ -693,11 +717,20 @@ export const products = [
       "sweaters",
       "hoodies",
       "apparel",
-      "mens"
-    ]
+      "mens",
+    ],
+    type: "clothing",
+    sizeChartLink: "images/clothing-size-chart.png"
   }
 ].map((productDetails) => {
-  return new Product(productDetails)
+  if (productDetails.type === 'clothing') {
+    return new Clothing(productDetails);
+  }
+
+
+
+
+  return new Product(productDetails);
 })
 
 
