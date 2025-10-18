@@ -748,8 +748,6 @@ export const products = [
   }
 
 
-
-
   return new Product(productDetails);
 })
 
