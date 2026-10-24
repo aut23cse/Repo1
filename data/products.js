@@ -49,6 +49,9 @@ class Clothing extends Product {
 
 
   }
+  
+
+  
   extraInfoHTML() {
     //super.extraInfoHTML();
     return `
